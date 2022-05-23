@@ -1,6 +1,6 @@
 {
-    "name": "buscador_gifs",
-    "short_name": "buscador_gifs",
+    "name": "buscador_gifs_02",
+    "short_name": "buscador_gifs_02",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

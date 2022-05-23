@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-import 'package:buscador_gifs/ui/gifs_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import 'gifs_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -122,65 +123,68 @@ class _HomeState extends State<Home> {
 
   _createTableGifs(BuildContext context, AsyncSnapshot snapshot) {
     return GridView.builder(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-        itemCount: _getCount(snapshot.data["data"]),
-        itemBuilder: (context, index) {
-          List teste = snapshot.data["data"];
-          if (_search == "" || index < teste.length) {
-            return GestureDetector(
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: snapshot.data["data"][index]["images"]["fixed_height"]
-                    ["url"],
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-              onTap: () {
-                //Ao clicar no GIF o usuario sera levado para outra tela onde mostrara apenas o GIF selecionado,
-                //e também tem o botão de compartilhar, porem atualmente não está funcionando.
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GifPage(snapshot.data["data"][index]),
-                  ),
-                );
-              },
-              onLongPress: () {
-                //Ao precionar o clique em cima do GIF, ira aparecer as opções de compartilhamento.
-                //Atulamente não está funcionando.
-                Share.share(snapshot.data["data"][index]["images"]
-                    ["fixed_height"]["url"]);
-              },
-            );
-          } else {
-            return GestureDetector(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 70,
-                    ),
-                    Text(
-                      "Carregar mais...",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
-                    ),
-                  ],
+      padding: const EdgeInsets.all(10),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+      itemCount: _getCount(snapshot.data["data"]),
+      itemBuilder: (context, index) {
+        List teste = snapshot.data["data"];
+        if (_search == "" || index < teste.length) {
+          return GestureDetector(
+            child: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: snapshot.data["data"][index]["images"]["fixed_height"]
+                  ["url"],
+              height: 300,
+              fit: BoxFit.cover,
+            ),
+            onTap: () {
+              //Ao clicar no GIF o usuario sera levado para outra tela onde mostrara apenas o GIF selecionado,
+              //e também tem o botão de compartilhar.
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GifPage(snapshot.data["data"][index]),
                 ),
-                //Ao clicar no botão carregar mais, e feita uma requisição de mais 19 GIF's, é necessario
-                //que seja 19 para que sobre 1 espaço para incluir o botão de carregar mais.
-                onTap: () {
-                  setState(() {
-                    _offset += 19;
-                  });
-                });
-          }
-        });
+              );
+            },
+            onLongPress: () {
+              //Ao precionar o clique em cima do GIF, ira aparecer as opções de compartilhamento.
+              Share.share(snapshot.data["data"][index]["images"]["fixed_height"]
+                  ["url"]);
+            },
+          );
+        } else {
+          return GestureDetector(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 70,
+                ),
+                Text(
+                  "Carregar mais...",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                  ),
+                ),
+              ],
+            ),
+            //Ao clicar no botão carregar mais, e feita uma requisição de mais 19 GIF's, é necessario
+            //que seja 19 para que sobre 1 espaço para incluir o botão de carregar mais.
+            onTap: () {
+              setState(
+                () {
+                  _offset += 19;
+                },
+              );
+            },
+          );
+        }
+      },
+    );
   }
 }
