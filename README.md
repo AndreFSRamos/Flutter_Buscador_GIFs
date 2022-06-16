@@ -1,16 +1,26 @@
-# buscador_gifs_02
+# Chat Online
 
-A new Flutter project.
+## Descrição.
 
-## Getting Started
+<p>Aplicativo simples e útil, desenvolvido com o framework Flutter e linguagem dart. Projeto para criação de layout em Grid e consumo de API Rest.</p>
 
-This project is a starting point for a Flutter application.
+## Tecnologias.
+#### Linguagem : dart.
+#### Framework : Flutter.
+#### API : https://developers.giphy.com/docs/api/
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Funcionalidades
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### 001 - Buscar Gifs
+#### 002 - Buscar Top Gifs
+#### 003 - Compartilhar Gifs
+
+
+## Ilustração
+
+![Gif de apresentação do projéto](https://github.com/AndreFSRamos/GifCards/blob/main/buscarGifs.gif)
+
+## Autor
+
+https://www.linkedin.com/in/andre-felipe-763a4a139/
